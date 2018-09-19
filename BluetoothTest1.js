@@ -1,6 +1,7 @@
 function onButtonClick() {
 
     var log = document.getElementById('output').innerHTML;
+    log = 'Hei!';
 
     //let filters = [];
 
