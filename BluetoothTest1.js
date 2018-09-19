@@ -1,5 +1,7 @@
 function onButtonClick() {
-    
+
+    var log = document.getElementById('output').innerHTML;
+
     //let filters = [];
 
     //let filterService = document.querySelector('#service').value;
@@ -29,13 +31,13 @@ function onButtonClick() {
 
     //console.log('Requesting Bluetooth Device...');
     //console.log('with ' + JSON.stringify(options));
-    navigator.bluetooth.requestDevice({ filters: [{service: "heart_rate"}]  })
+    navigator.bluetooth.requestDevice({ filters: [{ service: "heart_rate" }] })
         .then(device => {
-            console.log('> Name:             ' + device.name);
-            console.log('> Id:               ' + device.id);
-            console.log('> Connected:        ' + device.gatt.connected);
+            log = '> Name:             ' + device.name;
+            log += '> Id:               ' + device.id;
+            log += '> Connected:        ' + device.gatt.connected;
         })
         .catch(error => {
-            console.log('Argh! ' + error);
+            log = 'Argh! ' + error;
         });
 }
