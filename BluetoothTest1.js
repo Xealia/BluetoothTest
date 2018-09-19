@@ -1,7 +1,7 @@
-function onButtonClick() {
+var log = document.getElementById('output');
 
-    var log = document.getElementById('output').innerHTML;
-    log = 'Hei!';
+function onButtonClick() {
+    log.innerHTML = 'Hei!';
 
     //let filters = [];
 
@@ -34,11 +34,11 @@ function onButtonClick() {
     //console.log('with ' + JSON.stringify(options));
     navigator.bluetooth.requestDevice({ filters: [{ service: "heart_rate" }] })
         .then(device => {
-            log = '> Name:             ' + device.name;
-            log += '> Id:               ' + device.id;
-            log += '> Connected:        ' + device.gatt.connected;
+            log.innerHTML = '> Name:             ' + device.name;
+            log.innerHTML += '> Id:               ' + device.id;
+            log.innerHTML += '> Connected:        ' + device.gatt.connected;
         })
         .catch(error => {
-            log = 'Argh! ' + error;
+            log.innerHTML = 'Argh! ' + error;
         });
 }
