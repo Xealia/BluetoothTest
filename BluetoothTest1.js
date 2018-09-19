@@ -35,7 +35,6 @@ function onButtonClick() {
     log.innerHTML='Requesting Bluetooth Device...';
     navigator.bluetooth.requestDevice({
         acceptAllDevices: true,
-        services: ['heart_rate'],
         optionalServices: ['battery_service']
     })
         .then(device => {
