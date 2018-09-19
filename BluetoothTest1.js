@@ -32,7 +32,7 @@ function onButtonClick() {
 
     //console.log('Requesting Bluetooth Device...');
     //console.log('with ' + JSON.stringify(options));
-    navigator.bluetooth.requestDevice({ filters: [{ service: "heart_rate" }] })
+    navigator.bluetooth.requestDevice({ service: "heart_rate" })
         .then(device => {
             log.innerHTML = '> Name:             ' + device.name;
             log.innerHTML += '> Id:               ' + device.id;
