@@ -1,5 +1,5 @@
-async function onButtonClick() {
-
+function onButtonClick() {
+    
     let filters = [];
 
     let filterService = document.querySelector('#service').value;
@@ -27,15 +27,15 @@ async function onButtonClick() {
         options.filters = filters;
     }
 
-    try {
-        log('Requesting Bluetooth Device...');
-        log('with ' + JSON.stringify(options));
-        const device = await navigator.bluetooth.requestDevice(options);
-
-        log('> Name:             ' + device.name);
-        log('> Id:               ' + device.id);
-        log('> Connected:        ' + device.gatt.connected);
-    } catch (error) {
-        log('Argh! ' + error);
-    }
+    log('Requesting Bluetooth Device...');
+    log('with ' + JSON.stringify(options));
+    navigator.bluetooth.requestDevice(options)
+        .then(device => {
+            log('> Name:             ' + device.name);
+            log('> Id:               ' + device.id);
+            log('> Connected:        ' + device.gatt.connected);
+        })
+        .catch(error => {
+            log('Argh! ' + error);
+        });
 }
