@@ -1,48 +1,52 @@
-var log = document.getElementById('output');
-log.innerHTML = 'Hei!';
+var output = document.getElementById('output');
+output.innerHTML = 'Hei!';
 
 function onButtonClick() {
-    log.innerHTML ='Requesting Bluetooth Device...';
+    output.innerHTML = 'Requesting Bluetooth Device...';
     navigator.bluetooth.requestDevice(
-            { filters: [{ services: ['battery_service'] }] })
+        {
+            filters: [
+                { name: 'mPower' }
+            ]
+        })
         .then(device => {
-            log.innerHTML += '<br /> Connecting to GATT Server...';
+            output.innerHTML += '<br /> Connecting to GATT Server...';
             return device.gatt.connect();
         })
         .then(server => {
-            log.innerHTML += '<br />Getting Battery Service...';
+            output.innerHTML += '<br />Getting Battery Service...';
             return server.getPrimaryService('battery_service');
         })
         .then(service => {
-            log.innerHTML += '<br />Getting Battery Level Characteristic...';
+            output.innerHTML += '<br />Getting Battery Level Characteristic...';
             return service.getCharacteristic('battery_level');
         })
         .then(characteristic => {
-            log.innerHTML += '<br />Reading Battery Level...';
+            output.innerHTML += '<br />Reading Battery Level...';
             return characteristic.readValue();
         })
         .then(value => {
             let batteryLevel = value.getUint8(0);
-            log.innerHTML += '<br /> Battery Level is ' + batteryLevel + '%';
+            output.innerHTML += '<br /> Battery Level is ' + batteryLevel + '%';
         })
         .catch(error => {
-            log.innerHTML += '<br />Argh! ' + error;
+            output.innerHTML += '<br />Argh! ' + error;
         });
 }
 //function onButtonClick() {
 
 
-//    log.innerHTML='Requesting Bluetooth Device...';
+//    output.innerHTML='Requesting Bluetooth Device...';
 //    navigator.bluetooth.requestDevice({
 //        acceptAllDevices: true,
 //        optionalServices: ['battery_service']
 //    })
 //        .then(device => {
-//            log.innerHTML += '> Name:             ' + device.name;
-//            log.innerHTML += '> Id:               ' + device.id;
-//            log.innerHTML += '> Connected:        ' + device.gatt.connected;
+//            output.innerHTML += '> Name:             ' + device.name;
+//            output.innerHTML += '> Id:               ' + device.id;
+//            output.innerHTML += '> Connected:        ' + device.gatt.connected;
 //        })
 //        .catch(error => {
-//            log.innerHTML += 'Argh! ' + error;
+//            output.innerHTML += 'Argh! ' + error;
 //        });
 //}
