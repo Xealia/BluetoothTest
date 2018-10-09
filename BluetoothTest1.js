@@ -1,7 +1,8 @@
 function startCharging() {
     let options = {
-        filters: [{ name: "mPower" }, { services: [0xf00d] }],
-        optionalService: ["battery_service", 0xF00D000000001212efde1523785fef13d123]
+        filters: [{ name: "mPower" }, { services: ['0000f00d-1212-efde-1523-785fef13d123'] }],
+        optionalService: ['0000f00d-1212-efde-1523-785fef13d123']
+        //optionalService: ["battery_service", 0xF00D000000001212efde1523785fef13d123]
     };
     var output = document.getElementById("output");
     /*navigator.bluetooth
@@ -17,6 +18,8 @@ function startCharging() {
     navigator.bluetooth
         .requestDevice(options)
         .then(device => {
+            output.innerHTML += "<br /> ready...";
+
             if (!device.gatt.connected) {
                 output.innerHTML += "<br /> Connecting to GATT Server...";
 
@@ -27,8 +30,9 @@ function startCharging() {
                 return Promise.resolve();
             }
         })
-        /*.then(server => {
+        .then(server => {
             output.innerHTML += "<br />Getting Battery Service...";
+            //return server.getPrimaryServices();
             return server.getPrimaryService('0000f00d-1212-efde-1523-785fef13d123');
             //return server.getPrimaryService(0xF00D000000001212efde1523785fef13d123);
         })
@@ -36,7 +40,7 @@ function startCharging() {
             //console.log(services);
             //const service = services[0];
             output.innerHTML += "<br />Getting Battery Level Characteristic...";
-            return service.getCharacteristic(0xBEEF);
+            return service.getCharacteristic('0000beef-1212-efde-1523-785fef13d123');
         })
         .then(characteristic => {
             output.innerHTML += "<br />Reading Battery Level...";
@@ -45,7 +49,7 @@ function startCharging() {
         .then(value => {
             let batteryLevel = value.getUint8(0);
             output.innerHTML += "<br /> Battery Level is " + batteryLevel + "%";
-        })*/
+        })
         .catch(error => {
             output.innerHTML += "<br />Argh! " + error;
         });
