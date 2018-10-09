@@ -20,7 +20,7 @@ function startCharging() {
             output.innerHTML += "<br /> Connecting to GATT Server...";
             return device.gatt.connect();
         })
-        .then(server => {
+        /*.then(server => {
             output.innerHTML += "<br />Getting Battery Service...";
             return server.getPrimaryService('0000f00d-1212-efde-1523-785fef13d123');
             //return server.getPrimaryService(0xF00D000000001212efde1523785fef13d123);
@@ -38,7 +38,7 @@ function startCharging() {
         .then(value => {
             let batteryLevel = value.getUint8(0);
             output.innerHTML += "<br /> Battery Level is " + batteryLevel + "%";
-        })
+        })*/
         .catch(error => {
             output.innerHTML += "<br />Argh! " + error;
         });
