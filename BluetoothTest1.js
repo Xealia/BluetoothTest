@@ -17,10 +17,12 @@ function startCharging() {
     navigator.bluetooth
         .requestDevice(options)
         .then(device => {
-            output.innerHTML += "<br /> Connecting to GATT Server...";
             if (!device.gatt.connected) {
+                output.innerHTML += "<br /> Connecting to GATT Server...";
+
                 return device.gatt.connect();
             } else {
+                output.innerHTML += "<br /> Already connected.";
                 // Already connected.
                 return Promise.resolve();
             }
