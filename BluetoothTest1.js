@@ -18,7 +18,12 @@ function startCharging() {
         .requestDevice(options)
         .then(device => {
             output.innerHTML += "<br /> Connecting to GATT Server...";
-            return device.gatt.connect();
+            if (!device.gatt.connected) {
+                return device.gatt.connect();
+            } else {
+                // Already connected.
+                return Promise.resolve();
+            }
         })
         /*.then(server => {
             output.innerHTML += "<br />Getting Battery Service...";
