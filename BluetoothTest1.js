@@ -21,9 +21,7 @@ function startCharging() {
             output.innerHTML += "<br /> ready...";
 
             if (!device.gatt.connected) {
-                console.log("a");
                 output.innerHTML += "<br /> Connecting to GATT Server...";
-                console.log("b");
 
                 return device.gatt.connect();
             } else {
